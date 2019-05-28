@@ -1,0 +1,21 @@
+from SerialInterface import SerialInterface
+import time
+import math
+from Logger import console
+
+
+# interface = SerialInterface('/dev/tty.usbmodem1421', baud=9600)
+# interface = SerialInterface('/dev/tty.usbmodem1421', baud=38400)
+# interface = SerialInterface('/dev/tty.usbmodem1421', baud=57600)
+interface = SerialInterface('/dev/tty.usbmodem1421', baud=115200)
+interface.listen()
+time.sleep(1)
+
+console.log('Starting test')
+for i in range(0, 500):
+    interface.write('Number %d' % (i,))
+
+interface.flush()
+
+input('Waiting for completion...')
+interface.stop()
